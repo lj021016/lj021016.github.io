@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圣诞树光辉</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #0a0f2b;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            color: #fff;
+            padding: 20px;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1000px;
+            width: 100%;
+            gap: 30px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            color: #ffd700;
+            font-size: 2.8rem;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            color: #4dabf7;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .canvas-container {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            max-width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 150, 255, 0.3);
+        }
+        
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        #treeCanvas {
+            z-index: 1;
+        }
+        
+        #effectsCanvas {
+            z-index: 2;
+        }
+        
+        #snowCanvas {
+            z-index: 3;
+        }
+        
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .control-label {
+            color: #4dabf7;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        button {
+            background: linear-gradient(to bottom, #2ecc71, #27ae60);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 0 #219653;
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 0 #219653;
+            background: linear-gradient(to bottom, #27ae60, #2ecc71);
+        }
+        
+        button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 0 #219653;
+        }
+        
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 30, 60, 0.7);
+            padding: 8px 15px;
+            border-radius: 50px;
+        }
+        
+        input[type="range"] {
+            width: 150px;
+            height: 8px;
+            -webkit-appearance: none;
+            background: #1a3a5f;
+            border-radius: 4px;
+            outline: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #4dabf7;
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(77, 171, 247, 0.8);
+        }
+        
+        .instructions {
+            background: rgba(0, 30, 60, 0.7);
+            padding: 20px;
+            border-radius: 12px;
+            max-width: 800px;
+            margin-top: 10px;
+            border-left: 5px solid #4dabf7;
+        }
+        
+        .instructions h3 {
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+        
+        .instructions p {
+            line-height: 1.5;
+            color: #c9e4ff;
+        }
+        
+        .footer {
+            text-align: center;
+            color: #4dabf7;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+        
+        /* 补全媒体查询，适配移动设备 */
+        @media (max-width: 768px) {
+            .canvas-container {
+                height: 500px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
